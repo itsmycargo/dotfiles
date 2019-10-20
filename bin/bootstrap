@@ -18,13 +18,13 @@ then
 fi
 
 # Install homebrew
-if [ ! command -v brew ];
+if [ -z "$(command -v brew)" ];
 then
   echo "--> Installing homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-if [ ! command -v rcup ];
+if [ -z "$(command -v rcup)" ];
 then
   echo "--> Installing rcm"
   /usr/local/bin/brew tap thoughtbot/formulae
