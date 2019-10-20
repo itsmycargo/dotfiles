@@ -18,20 +18,26 @@ then
 fi
 
 # Install homebrew
-if [ ! -x /usr/local/bin/brew ];
+if [ ! command -v brew ];
 then
   echo "--> Installing homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-echo "--> Installing rcm"
-/usr/local/bin/brew tap thoughtbot/formulae
-/usr/local/bin/brew install rcm
+if [ ! command -v rcup ];
+then
+  echo "--> Installing rcm"
+  /usr/local/bin/brew tap thoughtbot/formulae
+  /usr/local/bin/brew install rcm
+fi
 
-echo "--> Clone Dotfiles Repository"
-git clone https://github.com/itsmycargo/dotfiles.git "${DOTFILES}/itsmycargo"
+if [ ! -d "${DOTFILES}/itsmycargo" ];
+then
+  echo "--> Clone Dotfiles Repository"
+  git clone https://github.com/itsmycargo/dotfiles.git "${DOTFILES}/itsmycargo"
+fi
 
-if [ -n "${github_user}" ];
+if [ -n "${github_user}" && ! -d "${DOTFILES}/local" ];
 then
   git clone "https://github.com/${github_user}/dotfiles.git" "${DOTFILES}/local"
 fi
