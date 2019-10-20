@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+DOTFILES=$(perl -MCwd -e 'print Cwd::realpath ($ARGV[0]), qq<\n>' "$(dirname "$0")"/../)
+
+# Ask for local dotfiles repo
+echo "Personal Dotfiles Github Username (leave empty to skip)?"
+read -r github_user
+
+/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/itsmycargo/dotfiles/master/bin/computer_name)"
+
+# Check for login shell
+if [ "$SHELL" != "/bin/zsh" ];
+then
+  echo "--> Shell: /bin/zsh"
+  chsh -s /bin/zsh
+fi
+
+# Install homebrew
+if [ ! -x /usr/local/bin/brew ];
+then
+  echo "--> Installing homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+echo "--> Installing rcm"
+/usr/local/bin/brew tap thoughtbot/formulae
+/usr/local/bin/brew install rcm
+
+echo "--> Clone Dotfiles Repository"
+git clone https://github.com/itsmycargo/dotfiles.git "${DOTFILES}/itsmycargo"
+
+if [ -n "${github_user}" ];
+then
+  git clone "https://github.com/${github_user}/dotfiles.git" "${DOTFILES}/local"
+fi
+
+echo "--> Install Dotfiles"
+env RCRC="${DOTFILES}/rcrc" rcup
