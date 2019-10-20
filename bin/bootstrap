@@ -2,7 +2,7 @@
 
 set -e
 
-DOTFILES=$(perl -MCwd -e 'print Cwd::realpath ($ARGV[0]), qq<\n>' "$(dirname "$0")"/../)
+DOTFILES=$(perl -MCwd -e 'print Cwd::realpath ($ARGV[0]), qq<\n>' "${HOME}"/.dotfiles/)
 
 # Ask for local dotfiles repo
 echo "Personal Dotfiles Github Username (leave empty to skip)?"
