@@ -40,10 +40,10 @@ then
   git clone https://github.com/itsmycargo/dotfiles.git "${DOTFILES}/itsmycargo"
 fi
 
-if [ -n "${github_user}" && ! -d "${DOTFILES}/local" ];
+if [ -n "${github_user}" -a ! -d "${DOTFILES}/local" ];
 then
   git clone "https://github.com/${github_user}/dotfiles.git" "${DOTFILES}/local"
 fi
 
 echo "--> Install Dotfiles"
-env RCRC="${DOTFILES}/rcrc" rcup
+env RCRC="${DOTFILES}/itsmycargo/rcrc" rcup
