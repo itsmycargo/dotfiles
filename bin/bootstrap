@@ -2,7 +2,7 @@
 
 set -e
 
-DOTFILES=$(perl -MCwd -e 'print Cwd::realpath ($ARGV[0]), qq<\n>' "${HOME}"/.dotfiles/)
+DOTFILES="${HOME}/.dotfiles"
 
 # Ask for local dotfiles repo
 if [ ! -d "${DOTFILES}/local" ];
