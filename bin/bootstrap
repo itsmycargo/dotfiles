@@ -38,11 +38,15 @@ if [ ! -d "${DOTFILES}/itsmycargo" ];
 then
   echo "--> Clone Dotfiles Repository"
   git clone https://github.com/itsmycargo/dotfiles.git "${DOTFILES}/itsmycargo"
+else
+  (cd "${DOTFILES}/itsmycargo" ; git pull )
 fi
 
 if [ -n "${github_user}" -a ! -d "${DOTFILES}/local" ];
 then
   git clone "https://github.com/${github_user}/dotfiles.git" "${DOTFILES}/local"
+else
+  (cd "${DOTFILES}/local" ; git pull )
 fi
 
 echo "--> Install Dotfiles"
