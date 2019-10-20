@@ -5,8 +5,11 @@ set -e
 DOTFILES=$(perl -MCwd -e 'print Cwd::realpath ($ARGV[0]), qq<\n>' "${HOME}"/.dotfiles/)
 
 # Ask for local dotfiles repo
-echo "Personal Dotfiles Github Username (leave empty to skip)?"
-read -r github_user
+if [ ! -d "${DOTFILES}/local" ];
+then
+  echo "Personal Dotfiles Github Username (leave empty to skip)?"
+  read -r github_user
+fi
 
 /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/itsmycargo/dotfiles/master/bin/computer_name)"
 
