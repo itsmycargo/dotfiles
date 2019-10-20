@@ -47,3 +47,9 @@ fi
 
 echo "--> Install Dotfiles"
 env RCRC="${DOTFILES}/itsmycargo/rcrc" rcup
+
+# Run local bootstrap is exists
+if [ -e "${DOTFILES}/local/bootstrap.sh" ];
+then
+  source "${DOTFILES}/local/bootstrap.sh"
+fi
