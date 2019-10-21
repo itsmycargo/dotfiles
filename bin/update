@@ -1,8 +1,8 @@
 #!/bin/sh
 
-set -e
+set -ex
 
-for dir in "${DOTFILES}"/*;
+for dir in "${DOTFILES_ROOT}"/*;
 do
 	(cd $dir; git pull)
 done
@@ -12,7 +12,7 @@ brew cask upgrade
 brew cleanup
 
 echo "--> Updating Brews"
-for brewfile in "${DOTFILES}"/itsmycargo/Brewfile "${DOTFILES}"/local/Brewfile;
+for brewfile in "${DOTFILES_ROOT}"/itsmycargo/Brewfile "${DOTFILES_ROOT}"/local/Brewfile;
 do
   $(command -v brew) bundle install --file="${brewfile}"
 done
