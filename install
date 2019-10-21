@@ -11,7 +11,8 @@ then
   read -r github_user
 fi
 
-/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/itsmycargo/dotfiles/master/bin/computer_name)"
+echo "--> Configuring Initial Settings"
+/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/itsmycargo/dotfiles/master/setup)"
 
 # Check for login shell
 if [ "$SHELL" != "/bin/zsh" ];
@@ -42,7 +43,7 @@ else
   (cd "${DOTFILES}/itsmycargo" ; git pull )
 fi
 
-if [ -n "${github_user}" -a ! -d "${DOTFILES}/local" ];
+if [ -n "${github_user}" ] && [ ! -d "${DOTFILES}/local" ];
 then
   git clone "https://github.com/${github_user}/dotfiles.git" "${DOTFILES}/local"
 else
@@ -52,8 +53,8 @@ fi
 echo "--> Install Dotfiles"
 env RCRC="${DOTFILES}/itsmycargo/rcrc" rcup
 
-# Run local bootstrap is exists
-if [ -e "${DOTFILES}/local/bootstrap.sh" ];
-then
-  sh "${DOTFILES}/local/bootstrap.sh"
-fi
+# Run additional install scripts
+for script in "${DOTFILES}/itsmycargo/install.d/*" "${DOTFILES}/local/install.d/*";
+do
+  sh "${script}"
+done

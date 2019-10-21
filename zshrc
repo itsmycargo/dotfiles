@@ -1,6 +1,5 @@
 # shortcut to this dotfiles path is $ZSH
 export DOTFILES_ROOT=$HOME/.dotfiles
-export ZSH=$DOTFILES_ROOT/zsh
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.

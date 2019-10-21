@@ -1,3 +1,3 @@
 COPY_ALWAYS=""
-EXCLUDES="README*.md LICENSE bin/ Brewfile zsh *.zsh"
+EXCLUDES="README*.md LICENSE install setup Brewfile zsh *.zsh"
 DOTFILES_DIRS="$HOME/.dotfiles/local $HOME/.dotfiles/itsmycargo"
