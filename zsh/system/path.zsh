@@ -1,0 +1,1 @@
+export PATH="${DOTFILES_ROOT}/itsmycargo.bin:${PATH}"

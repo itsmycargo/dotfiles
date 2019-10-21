@@ -1,12 +1,16 @@
 #!/bin/sh
 
-set -ex
+set -e
 
 for dir in "${DOTFILES_ROOT}"/*;
 do
-	(cd $dir; git pull)
+	(cd $dir; git pull --quiet)
 done
 
+echo '--> Update latest dotfiles'
+rcup
+
+echo '--> Keep Homebrew up-to-date'
 brew upgrade
 brew cask upgrade
 brew cleanup
