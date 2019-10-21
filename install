@@ -59,7 +59,13 @@ echo "--> Install Dotfiles"
 env RCRC="${DOTFILES}/itsmycargo/rcrc" rcup
 
 # Run additional install scripts
-for script in "${DOTFILES}"/itsmycargo/install.d/* "${DOTFILES}"/local/install.d/*;
+for script in "${DOTFILES}"/itsmycargo/install.d/*.sh "${DOTFILES}"/local/install.d/*.sh;
 do
   sh "${script}"
+done
+
+# Install Brews
+for brewfile in "${DOTFILES}"/itsmycargo/install.d/*.sh "${DOTFILES}"/local/install.d/*.sh;
+do
+  $(command -v brew) bundle install --file="${brewfile}"
 done
