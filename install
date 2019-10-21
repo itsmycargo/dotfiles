@@ -69,3 +69,9 @@ for brewfile in "${DOTFILES}"/itsmycargo/install.d/*.sh "${DOTFILES}"/local/inst
 do
   $(command -v brew) bundle install --file="${brewfile}"
 done
+
+# Run additional post-install scripts
+for script in "${DOTFILES}"/itsmycargo/post-install.d/*.sh "${DOTFILES}"/local/post-install.d/*.sh;
+do
+  sh "${script}"
+done
