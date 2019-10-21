@@ -11,6 +11,11 @@ then
   read -r github_user
 fi
 
+echo "--> Authorising Administrator Access"
+sudo -v
+
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
 echo "--> Configuring Initial Settings"
 /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/itsmycargo/dotfiles/master/setup)"
 
