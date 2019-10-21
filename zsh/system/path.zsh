@@ -1,1 +1,1 @@
-export PATH="${DOTFILES_ROOT}/itsmycargo.bin:${PATH}"
+export PATH="${DOTFILES_ROOT}/itsmycargo/bin:${PATH}"
