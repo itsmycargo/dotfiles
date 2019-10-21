@@ -65,7 +65,7 @@ do
 done
 
 # Install Brews
-for brewfile in "${DOTFILES}"/itsmycargo/install.d/*.sh "${DOTFILES}"/local/install.d/*.sh;
+for brewfile in "${DOTFILES}"/itsmycargo/Brewfile "${DOTFILES}"/local/Brewfile;
 do
   $(command -v brew) bundle install --file="${brewfile}"
 done
