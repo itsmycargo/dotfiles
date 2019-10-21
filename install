@@ -59,7 +59,7 @@ echo "--> Install Dotfiles"
 env RCRC="${DOTFILES}/itsmycargo/rcrc" rcup
 
 # Run additional install scripts
-for script in "${DOTFILES}/itsmycargo/install.d/*" "${DOTFILES}/local/install.d/*";
+for script in "${DOTFILES}"/itsmycargo/install.d/* "${DOTFILES}"/local/install.d/*;
 do
   sh "${script}"
 done
