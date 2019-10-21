@@ -16,7 +16,9 @@ brew cask upgrade
 brew cleanup
 
 echo "--> Updating Brews"
+shopt -s nullglob
 for brewfile in "${DOTFILES_ROOT}"/itsmycargo/Brewfile "${DOTFILES_ROOT}"/local/Brewfile;
 do
   $(command -v brew) bundle install --file="${brewfile}"
 done
+shopt -u nullglob

@@ -60,21 +60,27 @@ env RCRC="${DOTFILES}/itsmycargo/rcrc" rcup
 
 # Run additional install scripts
 echo "--> Install Scripts"
+shopt -s nullglob
 for script in "${DOTFILES}"/itsmycargo/install.d/*.sh "${DOTFILES}"/local/install.d/*.sh;
 do
   sh "${script}"
 done
+shopt -u nullglob
 
 # Install Brews
 echo "--> Installing Brews"
+shopt -s nullglob
 for brewfile in "${DOTFILES}"/itsmycargo/Brewfile "${DOTFILES}"/local/Brewfile;
 do
   $(command -v brew) bundle install --file="${brewfile}"
 done
+shopt -u nullglob
 
 # Run additional post-install scripts
 echo "--> Post-Install Scripts"
+shopt -s nullglob
 for script in "${DOTFILES}"/itsmycargo/post-install.d/*.sh "${DOTFILES}"/local/post-install.d/*.sh;
 do
   sh "${script}"
 done
+shopt -u nullglob
