@@ -2,6 +2,11 @@
 
 set -e
 
+for dir in "${DOTFILES}"/*;
+do
+	(cd $dir; git pull)
+done
+
 brew upgrade
 brew cask upgrade
 brew cleanup
