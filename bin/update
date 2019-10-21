@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+brew upgrade
+brew cask upgrade
+brew cleanup
+
+echo "--> Updating Brews"
+for brewfile in "${DOTFILES}"/itsmycargo/Brewfile "${DOTFILES}"/local/Brewfile;
+do
+  $(command -v brew) bundle install --file="${brewfile}"
+done
