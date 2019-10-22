@@ -35,7 +35,7 @@ shopt -u nullglob
 # Run additional update scripts
 echo "--> Post-Update Scripts"
 shopt -s nullglob
-for script in "${DOTFILES}"/{itsmycargo,local}/post-update.d/*.sh
+for script in "${DOTFILES}"/itsmycargo/post-update.d/*.sh "${DOTFILES}"/local/post-update.d/*.sh;
 do
   sh "${script}"
 done

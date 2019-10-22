@@ -88,7 +88,7 @@ shopt -u nullglob
 # Run additional post-install scripts
 echo "--> Post-Install Scripts"
 shopt -s nullglob
-for script in "${DOTFILES}"/{itsmycargo,local}/post-install.d/*.sh
+for script in "${DOTFILES}"/itsmycargo/post-install.d/*.sh "${DOTFILES}"/local/post-install.d/*.sh;
 do
   sh "${script}"
 done
