@@ -26,7 +26,7 @@ brew cleanup
 
 echo "--> Updating Brews"
 shopt -s nullglob
-for brewfile in "${DOTFILES}"/{itsmycargo,local}/Brewfile;
+for brewfile in "${DOTFILES_ROOT}"/{itsmycargo,local}/Brewfile;
 do
   [ -e "${brewfile}" ] && $(command -v brew) bundle install --file="${brewfile}"
 done
@@ -35,7 +35,7 @@ shopt -u nullglob
 # Run additional update scripts
 echo "--> Post-Update Scripts"
 shopt -s nullglob
-for script in "${DOTFILES}"/itsmycargo/post-update.d/*.sh "${DOTFILES}"/local/post-update.d/*.sh;
+for script in "${DOTFILES_ROOT}"/{itsmycargo,local}/post-update.d/*.sh;
 do
   sh "${script}"
 done

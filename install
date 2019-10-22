@@ -7,11 +7,11 @@ then
   set -x
 fi
 
-DOTFILES="${HOME}/.dotfiles"
-mkdir -p "${DOTFILES}"
+DOTFILES_ROOT="${HOME}/.dotfiles"
+mkdir -p "${DOTFILES_ROOT}"
 
 # Ask for local dotfiles repo
-if [ ! -d "${DOTFILES}/local" ];
+if [ ! -d "${DOTFILES_ROOT}/local" ];
 then
   echo "Personal Dotfiles Github Username (leave empty to skip)?"
   read -r github_user
@@ -46,31 +46,31 @@ then
   /usr/local/bin/brew install rcm
 fi
 
-if [ ! -d "${DOTFILES}/itsmycargo" ];
+if [ ! -d "${DOTFILES_ROOT}/itsmycargo" ];
 then
   echo "--> Clone Dotfiles Repository"
-  git clone https://github.com/itsmycargo/dotfiles.git "${DOTFILES}/itsmycargo"
+  git clone https://github.com/itsmycargo/dotfiles.git "${DOTFILES_ROOT}/itsmycargo"
 else
-  (cd "${DOTFILES}/itsmycargo" ; git pull )
+  (cd "${DOTFILES_ROOT}/itsmycargo" ; git pull )
 fi
 
 if [ -n "${github_user}" ];
 then
-  if [ ! -d "${DOTFILES}/local" ];
+  if [ ! -d "${DOTFILES_ROOT}/local" ];
   then
-    git clone "https://github.com/${github_user}/dotfiles.git" "${DOTFILES}/local"
+    git clone "https://github.com/${github_user}/dotfiles.git" "${DOTFILES_ROOT}/local"
   else
-    (cd "${DOTFILES}/local" ; git pull )
+    (cd "${DOTFILES_ROOT}/local" ; git pull )
   fi
 fi
 
 echo "--> Install Dotfiles"
-env RCRC="${DOTFILES}/itsmycargo/rcrc" rcup
+env RCRC="${DOTFILES_ROOT}/itsmycargo/rcrc" rcup
 
 # Run additional install scripts
 echo "--> Install Scripts"
 shopt -s nullglob
-for script in "${DOTFILES}"/itsmycargo/install.d/*.sh "${DOTFILES}"/local/install.d/*.sh;
+for script in "${DOTFILES_ROOT}"/itsmycargo/install.d/*.sh "${DOTFILES_ROOT}"/local/install.d/*.sh;
 do
   sh "${script}"
 done
@@ -79,7 +79,7 @@ shopt -u nullglob
 # Install Brews
 echo "--> Installing Brews"
 shopt -s nullglob
-for brewfile in "${DOTFILES}"/{itsmycargo,local}/Brewfile;
+for brewfile in "${DOTFILES_ROOT}"/{itsmycargo,local}/Brewfile;
 do
   [ -e "${brewfile}" ] && $(command -v brew) bundle install --file="${brewfile}"
 done
@@ -88,7 +88,7 @@ shopt -u nullglob
 # Run additional post-install scripts
 echo "--> Post-Install Scripts"
 shopt -s nullglob
-for script in "${DOTFILES}"/itsmycargo/post-install.d/*.sh "${DOTFILES}"/local/post-install.d/*.sh;
+for script in "${DOTFILES_ROOT}"/itsmycargo/post-install.d/*.sh "${DOTFILES_ROOT}"/local/post-install.d/*.sh;
 do
   sh "${script}"
 done
