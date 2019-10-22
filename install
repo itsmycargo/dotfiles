@@ -3,6 +3,7 @@
 set -e
 
 DOTFILES="${HOME}/.dotfiles"
+mkdir -p "${DOTFILES}"
 
 # Ask for local dotfiles repo
 if [ ! -d "${DOTFILES}/local" ];
@@ -48,11 +49,14 @@ else
   (cd "${DOTFILES}/itsmycargo" ; git pull )
 fi
 
-if [ -n "${github_user}" ] && [ ! -d "${DOTFILES}/local" ];
+if [ -n "${github_user}" ];
 then
-  git clone "https://github.com/${github_user}/dotfiles.git" "${DOTFILES}/local"
-else
-  (cd "${DOTFILES}/local" ; git pull )
+  if [ ! -d "${DOTFILES}/local" ];
+  then
+    git clone "https://github.com/${github_user}/dotfiles.git" "${DOTFILES}/local"
+  else
+    (cd "${DOTFILES}/local" ; git pull )
+  fi
 fi
 
 echo "--> Install Dotfiles"
@@ -70,9 +74,9 @@ shopt -u nullglob
 # Install Brews
 echo "--> Installing Brews"
 shopt -s nullglob
-for brewfile in "${DOTFILES}"/itsmycargo/Brewfile "${DOTFILES}"/local/Brewfile;
+for brewfile in "${DOTFILES}"/{itsmycargo,local}/Brewfile;
 do
-  $(command -v brew) bundle install --file="${brewfile}"
+  [ -e "${brewfile}" ] && $(command -v brew) bundle install --file="${brewfile}"
 done
 shopt -u nullglob
 
