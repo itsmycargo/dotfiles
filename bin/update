@@ -1,11 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
 echo '--> Fetch latest dotfiles'
 for dir in "${DOTFILES_ROOT}"/*;
 do
-	(cd "${dir}"; git pull --quiet)
+	if [ -d "${dir}/.git" ];
+  then
+    (cd "${dir}"; git pull --quiet)
+  fi
 done
 
 echo '--> Update latest dotfiles'
@@ -21,5 +24,14 @@ shopt -s nullglob
 for brewfile in "${DOTFILES}"/{itsmycargo,local}/Brewfile;
 do
   [ -e "${brewfile}" ] && $(command -v brew) bundle install --file="${brewfile}"
+done
+shopt -u nullglob
+
+# Run additional update scripts
+echo "--> Post-Update Scripts"
+shopt -s nullglob
+for script in "${DOTFILES}"/{itsmycargo,local}/post-update.d/*.sh
+do
+  sh "${script}"
 done
 shopt -u nullglob
