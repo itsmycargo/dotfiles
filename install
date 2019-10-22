@@ -2,6 +2,10 @@
 
 set -e
 
+if [ -n "${DOTFILES_DEBUG}" ];
+  set -x
+fi
+
 DOTFILES="${HOME}/.dotfiles"
 mkdir -p "${DOTFILES}"
 

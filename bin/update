@@ -2,6 +2,10 @@
 
 set -e
 
+if [ -n "${DOTFILES_DEBUG}" ];
+  set -x
+fi
+
 echo '--> Fetch latest dotfiles'
 for dir in "${DOTFILES_ROOT}"/*;
 do
