@@ -3,6 +3,7 @@
 set -e
 
 if [ -n "${DOTFILES_DEBUG}" ];
+then
   set -x
 fi
 
