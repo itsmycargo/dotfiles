@@ -2,6 +2,7 @@ cask_args appdir: "/Applications"
 
 brew 'awscli'
 brew 'cmake'
+brew 'hub'
 brew 'mas'
 brew 'node'
 brew 'postgis'
