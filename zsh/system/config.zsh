@@ -9,6 +9,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 REPORTTIME=5
+REPORTMEMORY=102400
 
 setopt NO_BG_NICE # don't nice background tasks
 setopt NO_HUP
