@@ -1,9 +1,8 @@
 cask_args appdir: "/Applications"
 
-brew 'awscli'
+# IMC Development Requirements
 brew 'cmake'
-brew 'hub'
-brew 'mas'
+brew 'elasticsearch'
 brew 'node'
 brew 'postgis'
 brew 'rbenv'
@@ -13,7 +12,17 @@ brew 'rbenv-whatis'
 brew 'redis'
 brew 'yarn'
 
+# Useful tools
+brew 'awscli'
+brew 'hub'
+brew 'pgcli'
+brew 'the_silver_searcher'
+
+# DevOps / Kubernetes
+brew 'kube-ps1'
+brew 'kubectx'
+brew 'kubernetes-helm'
+brew 'kubernetes-cli'
+
 cask 'aws-vault'
 cask 'docker'
-
-mas "Slack", id: 803453959
