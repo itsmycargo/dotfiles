@@ -1,7 +1,8 @@
 cask_args appdir: "/Applications"
 
 # IMC Development Requirements
-cask 'homebrew/cask-versions/adoptopenjdk8'
+tap 'homebrew/cask-versions'
+cask 'adoptopenjdk8'
 
 brew 'cmake'
 brew 'elasticsearch'
