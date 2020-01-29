@@ -20,15 +20,15 @@ echo '--> Update latest dotfiles'
 rcup
 
 echo '--> Keep Homebrew up-to-date'
-brew upgrade
-brew cask upgrade
-brew cleanup
+$(command -v brew) upgrade || true
+$(command -v brew) cask upgrade || true
+$(command -v brew) cleanup || true
 
 echo "--> Updating Brews"
 shopt -s nullglob
 for brewfile in "${DOTFILES_ROOT}"/{itsmycargo,local}/Brewfile;
 do
-  [ -e "${brewfile}" ] && $(command -v brew) bundle install --file="${brewfile}"
+  [ -e "${brewfile}" ] && $(command -v brew) bundle install --file="${brewfile}" || true
 done
 shopt -u nullglob
 
