@@ -12,7 +12,7 @@ for dir in "${DOTFILES_ROOT}"/*;
 do
 	if [ -d "${dir}/.git" ];
   then
-    (cd "${dir}"; git pull --quiet)
+    (cd "${dir}"; git pull --rebase --autostash --quiet)
   fi
 done
 
@@ -24,18 +24,10 @@ $(command -v brew) upgrade || true
 $(command -v brew) cask upgrade || true
 $(command -v brew) cleanup || true
 
-echo "--> Updating Brews"
-shopt -s nullglob
-for brewfile in "${DOTFILES_ROOT}"/{itsmycargo,local}/Brewfile;
-do
-  [ -e "${brewfile}" ] && $(command -v brew) bundle install --file="${brewfile}" || true
-done
-shopt -u nullglob
-
 # Run additional update scripts
 echo "--> Post-Update Scripts"
 shopt -s nullglob
-for script in "${DOTFILES_ROOT}"/{itsmycargo,local}/post-update.d/*.sh;
+for script in "${DOTFILES_ROOT}"/{itsmycargo,private,local}/post-update.d/*.sh;
 do
   sh "${script}"
 done

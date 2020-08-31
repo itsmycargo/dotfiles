@@ -1,4 +1,3 @@
 bundler <2.0
-overcommit
 pry
-rubocop
+rubocop-itsmycargo

@@ -10,8 +10,8 @@ fi
 DOTFILES_ROOT="${HOME}/.dotfiles"
 mkdir -p "${DOTFILES_ROOT}"
 
-# Ask for local dotfiles repo
-if [ ! -d "${DOTFILES_ROOT}/local" ];
+# Ask for private dotfiles repo
+if [ ! -d "${DOTFILES_ROOT}/private" ];
 then
   echo "Personal Dotfiles Github Username (leave empty to skip)?"
   read -r github_user
@@ -21,16 +21,6 @@ echo "--> Authorising Administrator Access"
 sudo -v
 
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
-echo "--> Configuring Initial Settings"
-/bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/itsmycargo/dotfiles/master/setup)"
-
-# Check for login shell
-if [ "$SHELL" != "/bin/zsh" ];
-then
-  echo "--> Shell: /bin/zsh"
-  chsh -s /bin/zsh
-fi
 
 # Install homebrew
 if [ -z "$(command -v brew)" ];
@@ -51,35 +41,35 @@ then
   echo "--> Clone Dotfiles Repository"
   git clone https://github.com/itsmycargo/dotfiles.git "${DOTFILES_ROOT}/itsmycargo"
 else
-  (cd "${DOTFILES_ROOT}/itsmycargo" ; git pull )
+  (cd "${DOTFILES_ROOT}/itsmycargo" ; git pull --rebase --autostash --quiet )
 fi
 
 if [ -n "${github_user}" ];
 then
-  if [ ! -d "${DOTFILES_ROOT}/local" ];
+  if [ ! -d "${DOTFILES_ROOT}/private" ];
   then
-    git clone "https://github.com/${github_user}/dotfiles.git" "${DOTFILES_ROOT}/local"
+    git clone "https://github.com/${github_user}/dotfiles.git" "${DOTFILES_ROOT}/private"
   else
-    (cd "${DOTFILES_ROOT}/local" ; git pull )
+    (cd "${DOTFILES_ROOT}/private" ; git pull --rebase --autostash --quiet )
   fi
 fi
-
-echo "--> Install Dotfiles"
-env RCRC="${DOTFILES_ROOT}/itsmycargo/rcrc" rcup
 
 # Run additional install scripts
 echo "--> Install Scripts"
 shopt -s nullglob
-for script in "${DOTFILES_ROOT}"/itsmycargo/install.d/*.sh "${DOTFILES_ROOT}"/local/install.d/*.sh;
+for script in "${DOTFILES_ROOT}"/itsmycargo/install.d/*.sh "${DOTFILES_ROOT}"/private/install.d/*.sh;
 do
   sh "${script}"
 done
 shopt -u nullglob
 
+echo "--> Install Dotfiles"
+env RCRC="${DOTFILES_ROOT}/itsmycargo/rcrc" rcup
+
 # Run additional post-install scripts
 echo "--> Post-Install Scripts"
 shopt -s nullglob
-for script in "${DOTFILES_ROOT}"/itsmycargo/post-install.d/*.sh "${DOTFILES_ROOT}"/local/post-install.d/*.sh;
+for script in "${DOTFILES_ROOT}"/itsmycargo/post-install.d/*.sh "${DOTFILES_ROOT}"/private/post-install.d/*.sh;
 do
   sh "${script}"
 done
