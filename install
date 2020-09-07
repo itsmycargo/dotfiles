@@ -9,6 +9,7 @@ fi
 
 DOTFILES_ROOT="${HOME}/.dotfiles"
 mkdir -p "${DOTFILES_ROOT}"
+export DOTFILES_ROOT
 
 # Ask for private dotfiles repo
 if [ ! -d "${DOTFILES_ROOT}/private" ];
