@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x
-
 echo "AWS Credentials"
 echo "Visit https://console.aws.amazon.com/iam/home?region=eu-central-1#/security_credentials"
 echo ""
