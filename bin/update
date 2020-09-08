@@ -21,7 +21,6 @@ rcup
 
 echo '--> Keep Homebrew up-to-date'
 $(command -v brew) upgrade || true
-$(command -v brew) cask upgrade || true
 $(command -v brew) cleanup || true
 
 # Run additional update scripts

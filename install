@@ -11,6 +11,12 @@ DOTFILES_ROOT="${HOME}/.dotfiles"
 mkdir -p "${DOTFILES_ROOT}"
 export DOTFILES_ROOT
 
+# Migrate local -> private
+if [ -d "${DOTFILES_ROOT}/local/.git" ];
+then
+  mv "${DOTFILES_ROOT}/local" "${DOTFILES_ROOT}/private"
+fi
+
 # Ask for private dotfiles repo
 if [ ! -d "${DOTFILES_ROOT}/private" ];
 then
@@ -37,7 +43,7 @@ then
   /usr/local/bin/brew install rcm
 fi
 
-# Company DotFiles
+# Company Dotfiles
 if [ ! -d "${DOTFILES_ROOT}/itsmycargo" ];
 then
   echo "--> Clone Dotfiles Repository"
@@ -47,12 +53,6 @@ else
 fi
 
 # Private Dotfiles
-# Migrate local -> private
-if [ -d "${DOTFILES_ROOT}/local/.git" ];
-then
-  mv "${DOTFILES_ROOT}/local" "${DOTFILES_ROOT}/private"
-fi
-
 if [ -n "${github_user}" ];
 then
   if [ ! -d "${DOTFILES_ROOT}/private" ];
@@ -63,7 +63,7 @@ then
   fi
 fi
 
-# Local Ditfiles
+# Local Dotfiles
 if [ ! -d "${DOTFILES_ROOT}/local" ];
 then
   mkdir -p "${DOTFILES_ROOT}/local"
