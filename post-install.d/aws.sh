@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -x
-
 if [ -z "$(/usr/local/bin/aws configure get aws_access_key_id)" ]; then
   echo "AWS Credentials"
   echo "Visit https://console.aws.amazon.com/iam/home?region=eu-central-1#/security_credentials"
