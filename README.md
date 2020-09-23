@@ -8,9 +8,3 @@ Simply run following script to trigger installation of IMC dotfiles and optional
 repository:
 
     /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/itsmycargo/dotfiles/master/install)"
-
-### Setup Employee Laptop
-
-Use following snippet for setting up new employee Apple Laptop/iMac:
-
-    /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/itsmycargo/dotfiles/master/setup)"
