@@ -39,8 +39,8 @@ fi
 if [ -z "$(command -v rcup)" ];
 then
   echo "--> Installing rcm"
-  /usr/local/bin/brew tap thoughtbot/formulae
-  /usr/local/bin/brew install rcm
+  /opt/homebrew/bin/brew tap thoughtbot/formulae
+  /opt/homebrew/bin/brew install rcm
 fi
 
 # Company Dotfiles

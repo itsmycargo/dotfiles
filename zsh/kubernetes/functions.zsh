@@ -1,4 +1,4 @@
-if [ -e /usr/local/opt/kube-ps1/share/kube-ps1.sh ];
+if [ -e /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh ];
 then
-  source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+  source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
 fi
