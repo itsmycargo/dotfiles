@@ -5,7 +5,8 @@ if [ -z "$(aws configure get aws_access_key_id)" ]; then
   echo "Visit https://console.aws.amazon.com/iam/home?region=eu-central-1#/security_credentials"
   echo ""
   read -p "Access Key ID: " aws_access_key_id
-  read -p "Secret Access Key: " aws_secret_access_key
+  echo "Secret Access Key: "
+  read -s aws_secret_access_key
 
   aws configure set aws_access_key_id "${aws_access_key_id}"
   aws configure set aws_secret_access_key "${aws_secret_access_key}"
